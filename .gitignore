@@ -1,5 +1,5 @@
 #openh264
-OpenH264/*.*
+native/OpenH264/*.*
 # Prerequisites
 *.d
 *.tlog
@@ -13,7 +13,7 @@ OpenH264/*.*
 *.lo
 *.o
 *.obj
-
+*.user
 # Precompiled Headers
 *.gch
 *.pch
