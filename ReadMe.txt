@@ -1,40 +1,38 @@
 ========================================================================
-    CONSOLE APPLICATION : PearlTest Project Overview
+    STATIC LIBRARY : PearlLib Project Overview
 ========================================================================
 
-AppWizard has created this PearlTest application for you.
+Mother of Toiletseat
+Capture / Processing library
 
-This file contains a summary of what you will find in each of the files that
-make up your PearlTest application.
+A 2 channel multi threaded processor framework.
+Uses Capture devices as inputs, codecs as transforms, and provides an interface to receive the end results.
+
+1) A processor is created. 
+2) A graph is created and the ISampleInput of the processor is given to the graph ISampleGrabber callback handlers.
+3) Codecs are wrapped by an ISampleTransform impl and given to the processor.
+4) After starting, the samples are queued up from the capture graph.
+5) Two threads begin compressing the two channels, and passing the results to an output queue.
+6) A third thread pulls the compressed data packets from the output ques, and passes them to the user ISampleInput implementation. 
+7) The sample packet is deleted.
+8) When destroyed, the capture graph and threads are stopped, and all queued packets are deleted.
 
 
-PearlTest.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+ __________        
+|          |
+| capture  |
+|__________|
+      |
+ ISampleInput 
+ _____|_____        __________________
+|           |      |                  |
+| Processor |------| ISampleTransform |
+|___________|      |__________________|
+      | 
+ ISampleInput
+ _____|_______        
+|             |  
+|  User impl  |
+|_____________|
 
-PearlTest.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
 
-PearlTest.cpp
-    This is the main application source file.
-
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named PearlTest.pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
