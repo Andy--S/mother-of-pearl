@@ -18,14 +18,4 @@ Uses Capture devices as inputs, codecs as transforms, and provides an interface 
 
        
           
-[ capture ]
-      |
- ISampleInput 
-      |
- -----------     
-[ Processor ]  <=====>  [ ISampleTransform ]
-      |
- ISampleInput
-      |
--------------
-[ User impl ]
+
