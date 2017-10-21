@@ -1,5 +1,5 @@
 # mother-of-pearl
-Capture device sample grabbing and compressing
+
 
 Mother of Toiletseat
 Capture / Processing library
@@ -15,3 +15,17 @@ Uses Capture devices as inputs, codecs as transforms, and provides an interface 
 6) A third thread pulls the compressed data packets from the output ques, and passes them to the user ISampleInput implementation. 
 7) The sample packet is deleted.
 8) When destroyed, the capture graph and threads are stopped, and all queued packets are deleted.
+
+       
+          
+[ capture ]
+      |
+ ISampleInput 
+      |
+ -----------     
+[ Processor ]  <=====>  [ ISampleTransform ]
+      |
+ ISampleInput
+      |
+-------------
+[ User impl ]
