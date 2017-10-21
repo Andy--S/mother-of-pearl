@@ -2,12 +2,7 @@
 OpenH264/*.*
 # Prerequisites
 *.d
-*.tlog
-*.lastbuildstate
-*.pdb
-*.jobj
-*.log
-*.vs/**
+
 # Compiled Object files
 *.slo
 *.lo
@@ -17,16 +12,7 @@ OpenH264/*.*
 # Precompiled Headers
 *.gch
 *.pch
-*.idb
-*.ipch
-*.jobj
-*.iobj
-*.ipdb
-*.db
-*.opendb
-*.db-shm
-*.suo
-*.db-wal
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
