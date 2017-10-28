@@ -14,7 +14,6 @@ struct PearlProcess :public MotherOfPearl
 {
 	Processor * process;
 	CCaptureGraph* graph;
-	CoderVid *videoCodec;
 };
 
 namespace motherofpearl
@@ -63,25 +62,63 @@ namespace motherofpearl
 
 		//}
 
-		//api->graph->SetUpGraph();
+		api->graph->SetUpGraph();
 
 		//api->graph->SetUpVideo(640, 480, 0, api->process);
 
 		//api->graph->SetupAudio(32000, 1, 0, api->process);
 
-		//api->videoCodec = new CoderVid();
-		//api->videoCodec->LoadDeps();
-		//api->videoCodec->PrintInfo();
-		//api->videoCodec->LoadDecoder();
-		//api->videoCodec->LoadEncoder(640, 480, 30, 1000000);
-		//api->process->setTransform(1, api->videoCodec);
 
-		//if (api->receiver)
-		//{
-		//	api->process->SetSink(api->receiver);
-		//}
+		if (api->receiver)
+		{
+			api->process->SetSink(api->receiver);
+		}
 
 
+	}
+	HRESULT SetupCompressors(MotherOfPearl* obj)
+	{
+		PearlProcess *api = static_cast<PearlProcess*>(obj);
+		if (!api)
+		{
+			return -1;
+		}
+		
+		if (api->video_compressor)
+		{
+			api->process->setTransform(1, api->video_compressor);
+		}
+		if (api->audio_comressor)
+		{
+			api->process->setTransform(2, api->audio_comressor);
+		}
+		return S_OK;
+
+	}
+	HRESULT SetUpVideo(MotherOfPearl* obj, uint32_t width, uint32_t height, uint32_t device_index)
+	{
+		PearlProcess *api = static_cast<PearlProcess*>(obj);
+		if (!api)
+		{
+			return -1;
+		}
+		HRESULT res = api->graph->SetUpVideo(width, height, device_index, api->process);
+		return res;
+	}
+	/*
+	sample_rate in HZ 41000
+	channel_count 
+	device_index
+	*/
+	HRESULT SetUpAudio(MotherOfPearl* obj,uint32_t sample_rate, uint32_t channel_count, uint32_t device_index)
+	{
+		PearlProcess *api = static_cast<PearlProcess*>(obj);
+		if (!api)
+		{
+			return -1;
+		}
+		HRESULT res = api->graph->SetupAudio(sample_rate, channel_count, device_index, api->process);
+		return res;
 	}
 	HRESULT GetAudioDeviceInfos(MotherOfPearl* obj, int* count)
 	{
@@ -229,8 +266,6 @@ namespace motherofpearl
 		
 		if(api->process)
 			api->process->stop();
-
-		delete api->videoCodec;
 
 		delete api->graph;
 

@@ -40,8 +40,9 @@ int main()
 		motherofpearl::GetAudioMediaTypeInformation(api,de_info,&into, 0);
 
 		std::cout << into.max_sample_rate << "\n";
-
+		motherofpearl::SetUpAudio(api, into.max_sample_rate, 1, 0);
 	}
+
 	if (video_device_count > 0)
 	{
 		DeviceInformation de_info;
@@ -51,7 +52,18 @@ int main()
 		PearlVideoInfo into;
 		motherofpearl::GetVideoMediaTypeInformation(api, de_info, &into, 0);
 		std::cout << into.width << "  " << into.height << "\n";
+		motherofpearl::SetUpVideo(api, into.width, into.height, 0);
+
 	}
+	
+
+
+	//api->videoCodec = new CoderVid();
+	//api->videoCodec->LoadDeps();
+	//api->videoCodec->PrintInfo();
+	//api->videoCodec->LoadDecoder();
+	//api->videoCodec->LoadEncoder(640, 480, 30, 1000000);
+	//api->process->setTransform(1, api->videoCodec);
 
 
 	Sleep(10000);
