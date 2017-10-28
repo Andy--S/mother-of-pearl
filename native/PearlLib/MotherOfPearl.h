@@ -32,41 +32,7 @@ namespace motherofpearl
 
 		api->graph = new CCaptureGraph();
 
-		//api->graph->GetVideoDeviceInfos();
-
-		//api->graph->GetAudioDeviceInfos();
-		
-		//for (int i = 0; i < api->graph->device_info.size(); i++)
-		//{
-		//	std::wcout << api->graph->device_info[i].friendly_name << "\n";
-		//	if (api->graph->device_info[i].channel == PEARL_CHANNEL_AUDIO)
-		//	{
-		//		for (int j = 0; j < api->graph->audio_types.size(); j++)
-		//		{
-		//			if (api->graph->audio_types[j].index == api->graph->device_info[i].index)
-		//			{
-		//				std::cout << api->graph->audio_types[j].min_sample_rate << "  " << api->graph->audio_types[j].max_sample_rate << "\n";
-		//			}
-		//		}
-		//	}
-		//	if (api->graph->device_info[i].channel == PEARL_CHANNEL_VIDEO)
-		//	{
-		//		for (int j = 0; j < api->graph->video_types.size(); j++)
-		//		{
-		//			if (api->graph->video_types[j].index == api->graph->device_info[i].index)
-		//			{
-		//				std::cout << api->graph->video_types[j].width << "  " << api->graph->video_types[j].height << "\n";
-		//			}
-		//		}
-		//	}
-
-		//}
-
 		api->graph->SetUpGraph();
-
-		//api->graph->SetUpVideo(640, 480, 0, api->process);
-
-		//api->graph->SetupAudio(32000, 1, 0, api->process);
 
 
 		if (api->receiver)
@@ -74,7 +40,7 @@ namespace motherofpearl
 			api->process->SetSink(api->receiver);
 		}
 
-
+		return S_OK;
 	}
 	HRESULT SetupCompressors(MotherOfPearl* obj)
 	{
@@ -105,8 +71,9 @@ namespace motherofpearl
 		HRESULT res = api->graph->SetUpVideo(width, height, device_index, api->process);
 		return res;
 	}
+
 	/*
-	sample_rate in HZ 41000
+	sample_rate in HZ 44100
 	channel_count 
 	device_index
 	*/
